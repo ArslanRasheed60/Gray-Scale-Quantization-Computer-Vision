@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
-from Utils import high_level_mapping_gray_scale, low_level_mapping_gray_scale
+from Utils import high_level_mapping_gray_scale, \
+                low_level_mapping_gray_scale, \
+                    mid_level_mapping_gray_scale, \
+                        mapping_rgb
 
 
 IMAGE_URL = './images/blue_dice.png'
@@ -26,9 +29,9 @@ try:
         raise ValueError
     else:
         mappingLevel = input("""What kind of mapping do you want? 
-            0: High Level
-            1: Low Level
-            2: Middle Level
+            Press 0: High Level
+            Press 1: Low Level
+            Press 2: Middle Level
             : """)
         try:
             
@@ -41,121 +44,42 @@ try:
             input_image_RGB = cv2.imread(IMAGE_URL)
             
             if int(mappingLevel) == 0:
-                # Perform zero-order interpolation for image enlargement
+                # Perform high level mapping on gray scale
                 mappedImage = high_level_mapping_gray_scale(input_image_grayscale, int(user_input))
-
                 mappedImage = np.array(mappedImage) 
                 mappedImage = np.uint8(mappedImage)
 
                 # Display the original and mappedImage images
                 cv2.imshow('Original Image GrayScale', input_image_grayscale)
-                cv2.imshow('High Level Mapped Image GrayScale2', mappedImage)
-                
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 4)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale4', mappedImage)
-
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 8)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale8', mappedImage)
-
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 16)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale16', mappedImage)
-
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 32)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale32', mappedImage)
-
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 64)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale64', mappedImage)
-
-
-                mappedImage = high_level_mapping_gray_scale(input_image_grayscale, 128)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('High Level Mapped Image GrayScale128', mappedImage)
-
-            if int(mappingLevel) == 1:
+                cv2.imshow(f'High Level {int(user_input)} Quantized Image GrayScale', mappedImage)
+            elif int(mappingLevel) == 1:
                 # Perform zero-order interpolation for image enlargement
                 mappedImage = low_level_mapping_gray_scale(input_image_grayscale, int(user_input))
-
                 mappedImage = np.array(mappedImage) 
                 mappedImage = np.uint8(mappedImage)
 
                 # Display the original and mappedImage images
                 cv2.imshow('Original Image GrayScale', input_image_grayscale)
-                cv2.imshow('Low Level Mapped Image GrayScale2', mappedImage)
-                
-
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 4)
-
+                cv2.imshow(f'Low Level {int(user_input)} Quantized Image GrayScale', mappedImage)
+            elif int(mappingLevel) == 2:
+                # Perform zero-order interpolation for image enlargement
+                mappedImage = mid_level_mapping_gray_scale(input_image_grayscale, int(user_input))
                 mappedImage = np.array(mappedImage) 
                 mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale4', mappedImage)
 
+                # Display the original and mappedImage images
+                cv2.imshow('Original Image GrayScale', input_image_grayscale)
+                cv2.imshow(f'Mid Level {int(user_input)} Quantized Image GrayScale', mappedImage)
 
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 8)
-
-                mappedImage = np.array(mappedImage) 
+            if int(mappingLevel) == 0 or int(mappingLevel) == 1 or int(mappingLevel) == 2:
+                # perform high level mapping on rgb
+                mappedImage = mapping_rgb(input_image_RGB, int(user_input), int(mappingLevel))
+                mappedImage = np.array(mappedImage)  # Your image data here
                 mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale8', mappedImage)
 
-
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 16)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale16', mappedImage)
-
-
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 32)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale32', mappedImage)
-
-
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 64)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale64', mappedImage)
-
-
-                mappedImage = low_level_mapping_gray_scale(input_image_grayscale, 128)
-
-                mappedImage = np.array(mappedImage) 
-                mappedImage = np.uint8(mappedImage)
-                cv2.imshow('Low Level Mapped Image GrayScale128', mappedImage)
-            
-            # if int(isRGBoutput) == 1:
-            #     enlarged_image_RGB = zero_order_enlargement_rgb(input_image_RGB, ZERO_ORDER_KERNEL)
-            #     enlarged_image_RGB = np.array(enlarged_image_RGB)  # Your image data here
-            #     enlarged_image_RGB = np.uint8(enlarged_image_RGB)
-
-            #     # Display the original and enlarged images
-            #     cv2.imshow('Original Image RGB', input_image_RGB)
-            #     cv2.imshow('Enlarged zer order Image RGB', enlarged_image_RGB)
-            # else:
-            #     print("Invalid Input")
+                # Display the original and enlarged images
+                cv2.imshow('Original Image RGB', input_image_RGB)
+                cv2.imshow(f'RGB {int(user_input)} Quantized Image RGB', mappedImage)
 
             cv2.waitKey(0)
             cv2.destroyAllWindows()
