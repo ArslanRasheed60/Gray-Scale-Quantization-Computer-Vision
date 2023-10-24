@@ -12,3 +12,5 @@
 > 
 > Middle Level -> Move all quantized bits to center value
 
+### You need to close all windows for testing other mapping level
+
