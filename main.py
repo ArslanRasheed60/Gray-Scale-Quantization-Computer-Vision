@@ -42,8 +42,9 @@ try:
             input_image_grayscale = cv2.imread(IMAGE_URL, 0) 
             # Read the image in RGB
             input_image_RGB = cv2.imread(IMAGE_URL)
-            
+            print("Processing Grey Level...")
             if int(mappingLevel) == 0:
+                
                 # Perform high level mapping on gray scale
                 mappedImage = high_level_mapping_gray_scale(input_image_grayscale, int(user_input))
                 mappedImage = np.array(mappedImage) 
@@ -70,7 +71,8 @@ try:
                 # Display the original and mappedImage images
                 cv2.imshow('Original Image GrayScale', input_image_grayscale)
                 cv2.imshow(f'Mid Level {int(user_input)} Quantized Image GrayScale', mappedImage)
-
+            print("Grey Level Processing done.")
+            print("Processing RGB Level...")
             if int(mappingLevel) == 0 or int(mappingLevel) == 1 or int(mappingLevel) == 2:
                 # perform high level mapping on rgb
                 mappedImage = mapping_rgb(input_image_RGB, int(user_input), int(mappingLevel))
@@ -80,7 +82,8 @@ try:
                 # Display the original and enlarged images
                 cv2.imshow('Original Image RGB', input_image_RGB)
                 cv2.imshow(f'RGB {int(user_input)} Quantized Image RGB', mappedImage)
-
+            print("RGB Processing done.")
+            print("Waiting for all windows to Close")
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
