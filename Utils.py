@@ -16,7 +16,7 @@ def create_masks(power_of_two):
     return or_mask
 
 # map all pixel values to the higher qunatized value
-def high_level_mapping_gray_scale(matrix, quantization_size):
+def high_level_mapping_gray_scale(matrix, quantization_size: int):
     
     #calculate the key
     key = int(TOTAL_COLOR_VALUE / quantization_size)
@@ -38,7 +38,7 @@ def high_level_mapping_gray_scale(matrix, quantization_size):
 
 
 # map all pixel values to the low qunatized value
-def low_level_mapping_gray_scale(matrix, quantization_size):
+def low_level_mapping_gray_scale(matrix, quantization_size: int):
     
     #calculate the key
     key = int(TOTAL_COLOR_VALUE / quantization_size)
@@ -60,7 +60,7 @@ def low_level_mapping_gray_scale(matrix, quantization_size):
     return new_matrix
 
 # map all pixel values to the mid qunatized value
-def mid_level_mapping_gray_scale(matrix, quantization_size):
+def mid_level_mapping_gray_scale(matrix, quantization_size: int):
     
     #calculate the key
     key = int(TOTAL_COLOR_VALUE / quantization_size)
