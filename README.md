@@ -12,7 +12,7 @@
 > 
 > Middle Level -> Move all quantized bits to center value
 
-### You need to close all windows for testing other mapping level
+### You need to close all windows for testing other mapping level if you are running console version
 >
 > Note: Greater the resolution of image greater will be the prcoessing time
 >
